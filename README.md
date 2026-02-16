@@ -21,6 +21,37 @@ This lab includes configuration, troubleshooting, trust alignment, and CloudTrai
 ---
 
 ## Architecture
+The integration uses an IAM gateway model rather than direct SAML federation. The authentication and authorization flow is as follows:
+ End User
+↓
+Okta Workforce (Identity Provider)
+↓
+IAM User (Okta-Provisioning)
+↓ sts:AssumeRole
+IAM Role (Okta-Admin-Role)
+↓ Temporary Credentials
+AWS Console Session
+↘
+AWS CloudTrail (eventName: AssumeRole)
+
+
+### Flow Explanation
+
+1. The **End User** authenticates with Okta.
+2. Okta uses the **IAM Provisioning User** (`Okta-Provisioning`) to call AWS.
+3. The IAM user performs `sts:AssumeRole` against the target IAM role.
+4. AWS returns **temporary credentials** for the assumed role.
+5. The user accesses the **AWS Console** using the assumed role session.
+6. AWS logs the role assumption in **CloudTrail** as an `AssumeRole` event.
+
+### Key Trust Boundary
+
+The IAM role trust policy must allow:
+
+- `Principal: IAM User`
+- `Action: sts:AssumeRole`
+
+Using `AssumeRoleWithSAML` or a `Federated` principal will break this Workforce integration model.
 
 
 
