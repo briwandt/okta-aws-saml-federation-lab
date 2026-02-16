@@ -112,6 +112,12 @@ Enabled provisioning features
 Assigned IAM role to the user
 
 ```
+---
+
+## Full Case Study
+
+Detailed walkthrough available here:  
+[Okta → AWS IAM Role Federation Case Study](https://reliable-bougon-dc6.notion.site/309bb6ca1876801ca7f8d136c34c8e4b)
 
 ---
 
