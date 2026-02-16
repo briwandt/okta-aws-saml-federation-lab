@@ -22,9 +22,6 @@ This lab includes configuration, troubleshooting, trust alignment, and CloudTrai
 
 ## Architecture
 
-## Architecture Diagram
-
-<img src="diagrams/okta-aws-iam-gateway-architecture.png" width="850">
 
 
 ### Key Components
