@@ -22,7 +22,10 @@ This lab includes configuration, troubleshooting, trust alignment, and CloudTrai
 
 ## Architecture
 
-User → Okta (IdP) → IAM Provisioning User → IAM Role → AWS Console
+## Architecture Diagram
+
+<img src="diagrams/okta-aws-iam-gateway-architecture.png" width="850">
+
 
 ### Key Components
 
