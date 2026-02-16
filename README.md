@@ -1,7 +1,3 @@
-
----
-
-````markdown
 # Okta → AWS IAM Role Federation Lab (Workforce Model)
 
 ## Project Summary
@@ -70,121 +66,19 @@ The IAM role must trust the IAM provisioning user (NOT a SAML provider):
     }
   ]
 }
-````
+Using Principal: Federated with sts:AssumeRoleWithSAML will cause AWS IAM Role SSO failure in this integration model.
 
-Using `Principal: Federated` with `sts:AssumeRoleWithSAML` will cause AWS IAM Role SSO failure in this integration model.
+Okta Configuration (High-Level)
 
----
+Added AWS Account Federation (IAM Role) app
 
-## Okta Configuration (High-Level)
+Enabled API provisioning
 
-* Added AWS Account Federation (IAM Role) app
-* Enabled API provisioning
-* Configured Access Key, Secret Key, and Connected Account ID
-* Enabled provisioning features
-* Assigned IAM role to the user
+Configured Access Key, Secret Key, and Connected Account ID
 
----
+Enabled provisioning features
 
-## Federation Failure & Root Cause
-
-### Error Encountered
-
-```
-Amazon AWS IAM Role SSO Error
-Your account has not been configured for use with the Amazon IAM Role SSO.
-```
-
-### Root Cause
-
-The IAM role trust policy was initially configured for SAML federation:
-
-```
-Principal: Federated
-Action: sts:AssumeRoleWithSAML
-```
-
-However, the Workforce IAM Role integration uses:
-
-```
-Principal: IAM User
-Action: sts:AssumeRole
-```
-
-The mismatch between STS action and trust policy caused AWS to reject role assumption.
-
-### Resolution
-
-Updated the IAM trust policy to allow the IAM provisioning user to assume the role via `sts:AssumeRole`, aligning the integration model with AWS STS behavior.
-
----
-
-## CloudTrail Validation
-
-Successful federation generates:
-
-```
-eventName: AssumeRole
-userIdentity.type: IAMUser
-requestParameters.roleArn
-sessionContext.sessionIssuer.arn
-```
-
-Traditional SAML federation generates:
-
-```
-eventName: AssumeRoleWithSAML
-```
-
-Understanding this distinction is critical when building detections for federated access and IAM role abuse.
-
----
-
-## Security Considerations
-
-* Monitor `AssumeRole` activity from IAM gateway users
-* Alert on IAM trust policy changes
-* Detect anomalous or excessive role assumption
-* Restrict provisioning user permissions in production
-* Enforce MFA at the identity provider level
-
----
-
-## Skills Demonstrated
-
-* AWS IAM role configuration
-* Trust policy design and debugging
-* STS federation models (`AssumeRole` vs `AssumeRoleWithSAML`)
-* Okta Workforce identity integration
-* CloudTrail log analysis
-* Identity-to-cloud access troubleshooting
-
----
-
-## Repository Structure
-
-```
-/screenshots   → Configuration UI captures  
-/configs       → IAM trust policies and provisioning configs  
-/diagrams      → Architecture diagrams  
-/logs          → CloudTrail samples  
-```
-
----
-
-## Lessons Learned
-
-* Federation models must align with IAM trust configuration
-* AWS error messages can obscure trust mismatches
-* Workforce IAM Role integration differs from classic SAML federation
-* STS event type reveals the true authentication path
-* Debugging trust boundaries is critical in cloud identity engineering
-
----
-
-## Full Case Study
-
-[https://reliable-bougon-dc6.notion.site/309bb6ca1876801ca7f8d136c34c8e4b](https://reliable-bougon-dc6.notion.site/309bb6ca1876801ca7f8d136c34c8e4b)
+Assigned IAM role to the user
 
 ```
 
