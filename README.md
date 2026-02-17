@@ -57,6 +57,7 @@ flowchart LR
 - Allowed `sts:AssumeRoleWithSAML`.
 
 📸 Screenshot:
+
 ![IAM Trust Policy](images/trust-policy.png)
 
 ---
