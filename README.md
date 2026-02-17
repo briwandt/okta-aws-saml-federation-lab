@@ -46,7 +46,7 @@ flowchart LR
 
 📸 Screenshot:
 
-![Okta AWS Integration](images/okta-aws-integration.png)
+![Okta AWS Integration](screenshots/okta-aws-integration.png)
 
 ---
 
@@ -58,7 +58,7 @@ flowchart LR
 
 📸 Screenshot:
 
-![IAM Trust Policy](images/trust-policy.png)
+![IAM Trust Policy](screenshots/trust-policy.png)
 
 ---
 
@@ -67,7 +67,8 @@ flowchart LR
 User successfully authenticated via Okta and assumed AWS IAM role.
 
 📸 Screenshot:
-![Successful SSO](images/successful-sso.png)
+
+![IAM Trust Policy](screenshots/trust-policy.png)
 
 ---
 
@@ -77,10 +78,10 @@ Verified SAML role assumption in AWS CloudTrail logs.
 
 📸 Screenshot:
 
-![CloudTrail Logs](images/cloud-trail-logs.png)
+![CloudTrail Logs](screenshots/cloud-trail-logs.png)
 
 ---
-
+ 
 ## 🧠 Identity Concepts Demonstrated
 
 - SAML 2.0 federation
