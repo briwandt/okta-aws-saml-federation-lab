@@ -57,7 +57,6 @@ flowchart LR
 - Allowed `sts:AssumeRoleWithSAML`.
 
 📸 Screenshot:
-
 ![IAM Trust Policy](images/trust-policy.png)
 
 ---
@@ -67,8 +66,7 @@ flowchart LR
 User successfully authenticated via Okta and assumed AWS IAM role.
 
 📸 Screenshot:
-
-![Successful SSO](images/successful-SSO.png)
+![Successful SSO](images/successful-sso.png)
 
 ---
 
