@@ -68,7 +68,7 @@ User successfully authenticated via Okta and assumed AWS IAM role.
 
 📸 Screenshot:
 
-![IAM Trust Policy](screenshots/trust-policy.png)
+![IAM Trust Policy](screenshots/successful-sso.png)
 
 ---
 
